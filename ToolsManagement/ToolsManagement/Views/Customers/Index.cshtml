@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ToolsManagement.Models.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+}
+
+<h2>Customers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.Name)</b>
+        </th>
+        <th><b>Action</b></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { customerId = item.CustomerId }) |
+                @Html.ActionLink("Delete", "Delete", new { customerId = item.CustomerId }, new { onclick = "return confirm('Are you sure you want to delete this Customer?');" })
+
+            </td>
+        </tr>
+    }
+
+    @if (Model.ToList().Count == 0)
+    {
+        <tr><td colspan="2">No Customer Exist.</td></tr>
+    }
+
+</table>

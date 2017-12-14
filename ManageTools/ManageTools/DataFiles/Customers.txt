@@ -1,0 +1,6 @@
+1; Khushal Bokde; 0;
+2; Parth Patel; 0;
+3; Jatin Patel; 0;
+4; Sandeep Bagde; 1;
+5; Nisarg Shukla; 1;
+6; Dipen Mandaliya; 0;

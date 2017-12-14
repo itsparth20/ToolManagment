@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My Manage Tools Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style type="text/css">
+        .navbar-brand {
+            transform: translateX(-50%);
+            left: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Manage Tools", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" style="float:right;">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                    <li>@Html.ActionLink("Tools", "Index", "Tools")</li>
+                    <li>@Html.ActionLink("Rental", "Index", "Rental")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Manage Tools</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/pnotify")
+    <script type="text/javascript">
+        function ShowNotifiction(title, text, type) {
+
+            if (type == "success")
+                icon = "icon-checkmark3";
+            else if (type == "warning")
+                icon = "icon-warning2";
+            else if (type == "info")
+                icon = "icon-info22";
+
+            new PNotify({
+                title: title,
+                text: text,
+                icon: icon,
+                type: type
+            });
+        }
+
+        @if (TempData["ShowNotification"] != null && TempData["ShowNotification"].ToString() == "True")
+        {
+            @:ShowNotifiction('@TempData["TitleNotification"]', '@TempData["TextNotification"]', '@TempData["TypeNotification"]');
+
+            @TempData.Remove("ShowNotification")
+            @TempData.Remove("TitleNotification")
+            @TempData.Remove("TextNotification")
+            @TempData.Remove("TypeNotification")
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

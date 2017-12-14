@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ManageTools.Models.Rental>
+
+@{
+    ViewBag.Title = "Rental";
+}
+
+<h2>Rental</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        <b>Customer Name:</b> @Html.TextBox("SearchString", "", new { @class = "form-control", @style = "display: inline-block !important;" })
+        &nbsp; &nbsp;<b>Tool:</b> @Html.DropDownList("ToolId", new SelectList(ViewBag.ToolList, "Value", "Text"), "---Select Tool---", new { @class = "form-control", @style = "display: inline-block !important;" })
+        <input type="submit" value="Search" class="btn btn-default" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.CustId)</b>
+        </th>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.ToolId)</b>
+        </th>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.DateOut)</b>
+        </th>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.DateIn)</b>
+        </th>
+        <th><b>Action</b></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tool.ToolName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateIn)
+            </td>
+            <td>
+                @if (string.IsNullOrEmpty(item.DateIn))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { rentalId = item.RentalId }) @*|
+                        @Html.ActionLink("Details", "Details", new { id=item.RentalId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.RentalId })*@
+                }
+            </td>
+        </tr>
+    }
+    @if (Model.ToList().Count == 0)
+    {
+        <tr><td colspan="5">No Rental Exist.</td></tr>
+    }
+</table>

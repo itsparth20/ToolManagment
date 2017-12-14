@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ManageTools.Models.Tool>
+
+@{
+    ViewBag.Title = "Tools";
+}
+
+<h2>Tools</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.ToolName)</b>
+        </th>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.IsRented)</b>
+        </th>
+        <th><b>Action</b></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToolName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRented)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { toolId = item.ToolId })
+            </td>
+        </tr>
+    }
+    @if (Model.ToList().Count == 0)
+    {
+        <tr><td colspan="3">No Tool Exist.</td></tr>
+    }
+</table>

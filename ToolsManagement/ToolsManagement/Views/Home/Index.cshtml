@@ -1,0 +1,55 @@
+﻿@model ToolsManagement.Models.FileUpload
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Tools Management</h1>
+    <p class="lead">Manage your tools.</p>
+</div>
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>Data Files</h3>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2" for="CustomerFile"><b>CustomerFile</b></label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(Model => Model.CustomerFile, "", new { type = "file", @style = "padding: 8px 0;" })
+                @Html.ValidationMessageFor(model => model.CustomerFile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ToolFile"><b>ToolFile</b></label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(Model => Model.ToolFile, "", new { type = "file", @style = "padding: 8px 0;" })
+                @Html.ValidationMessageFor(model => model.ToolFile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="RentalFile"><b>RentalFile</b></label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(Model => Model.RentalFile, "", new { type = "file", @style = "padding: 8px 0;" })
+                @Html.ValidationMessageFor(model => model.RentalFile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
